@@ -3,13 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Train Search App</title>
+    <title>Train Search App - IRCTC Live Search</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <div class="container">
         <header>
-            <h1>Train Search App</h1>
+            <h1>🚆 Indian Railway Train Search</h1>
+            <p>Search trains between stations using IRCTC live data</p>
         </header>
         
         <main>
@@ -17,23 +18,53 @@
                 <h2>Search Trains</h2>
                 
                 <form id="trainSearchForm">
-                    <div class="form-group">
-                        <label for="from">From:</label>
-                        <input type="text" id="from" name="from" placeholder="Enter departure station" required>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="fromCode">From Station Code:</label>
+                            <input type="text" id="fromCode" name="fromCode" 
+                                   placeholder="e.g., NDLS" 
+                                   required 
+                                   pattern="[A-Za-z]{2,5}" 
+                                   title="Enter valid station code (2-5 letters)">
+                            <small>Enter station code (e.g., NDLS for New Delhi)</small>
+                        </div>
+                        
+                        <div class="swap-button">
+                            <button type="button" onclick="swapStations()" title="Swap stations">⇄</button>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="toCode">To Station Code:</label>
+                            <input type="text" id="toCode" name="toCode" 
+                                   placeholder="e.g., BCT" 
+                                   required 
+                                   pattern="[A-Za-z]{2,5}" 
+                                   title="Enter valid station code (2-5 letters)">
+                            <small>Enter station code (e.g., BCT for Mumbai Central)</small>
+                        </div>
                     </div>
                     
                     <div class="form-group">
-                        <label for="to">To:</label>
-                        <input type="text" id="to" name="to" placeholder="Enter destination station" required>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="date">Date:</label>
+                        <label for="date">Journey Date:</label>
                         <input type="date" id="date" name="date" required>
                     </div>
                     
-                    <button type="submit" class="search-btn">Search</button>
+                    <button type="submit" class="search-btn">
+                        🔍 Search Trains
+                    </button>
                 </form>
+                
+                <div class="station-help">
+                    <h3>Popular Station Codes:</h3>
+                    <div class="station-codes">
+                        <span class="code" onclick="setStation('NDLS', 'from')">NDLS - New Delhi</span>
+                        <span class="code" onclick="setStation('BCT', 'from')">BCT - Mumbai Central</span>
+                        <span class="code" onclick="setStation('SBC', 'from')">SBC - Bangalore City</span>
+                        <span class="code" onclick="setStation('MAS', 'from')">MAS - Chennai Central</span>
+                        <span class="code" onclick="setStation('HWH', 'from')">HWH - Kolkata Howrah</span>
+                        <span class="code" onclick="setStation('SC', 'from')">SC - Hyderabad</span>
+                    </div>
+                </div>
             </div>
             
             <div class="results" id="results">
